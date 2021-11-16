@@ -39,5 +39,5 @@ let StyleSchema = mongoose.Schema({
 })
 
 const RelatedSchema = mongoose.Schema({
-  "product-id": Number
+  "product_id": Number
 })
