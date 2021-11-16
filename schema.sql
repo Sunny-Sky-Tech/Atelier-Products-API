@@ -9,6 +9,13 @@ CREATE TABLE products (
   default_price VARCHAR(10)
 );
 
+CREATE TABLE features (
+  id INTEGER NOT NULL PRIMARY KEY,
+  product_id INTEGER,
+  feature VARCHAR(80),
+  value VARCHAR(255)
+);
+
 CREATE TABLE styles (
   style_id INTEGER NOT NULL PRIMARY KEY,
   product_id INTEGER NOT NULL,
@@ -16,13 +23,6 @@ CREATE TABLE styles (
   original_price VARCHAR(15),
   sale_price VARCHAR(15),
   default_ BOOLEAN
-);
-
-CREATE TABLE features (
-  id INTEGER NOT NULL PRIMARY KEY,
-  product_id INTEGER,
-  feature VARCHAR(80),
-  value VARCHAR(255)
 );
 
 CREATE TABLE skus (
