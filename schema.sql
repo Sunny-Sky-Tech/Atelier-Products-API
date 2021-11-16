@@ -17,12 +17,12 @@ CREATE TABLE features (
 );
 
 CREATE TABLE styles (
-  style_id INTEGER NOT NULL PRIMARY KEY,
+  id INTEGER NOT NULL PRIMARY KEY,
   product_id INTEGER NOT NULL,
   name VARCHAR(100),
   original_price VARCHAR(15),
   sale_price VARCHAR(15),
-  default_ BOOLEAN
+  default BOOLEAN
 );
 
 CREATE TABLE skus (
