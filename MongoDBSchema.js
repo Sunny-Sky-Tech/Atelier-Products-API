@@ -28,12 +28,13 @@ let StyleSchema = mongoose.Schema({
         "thumbnail_url": String,
         "url": String
       }],
-      "skus": {
-        "increment": {
-          "quantity": Integer,
-          "size": String
+      skus: [
+        {
+          id: Number,
+          quantity: Integer,
+          size: String
         }
-      }
+      ]
     }
   ]
 })
