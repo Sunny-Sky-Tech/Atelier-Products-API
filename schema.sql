@@ -11,14 +11,14 @@ CREATE TABLE products (
 
 CREATE TABLE features (
   id INTEGER NOT NULL PRIMARY KEY,
-  product_id INTEGER,
+  product_id INTEGER REFERENCES products(id),
   feature VARCHAR(80),
   value VARCHAR(255)
 );
 
 CREATE TABLE styles (
   id INTEGER NOT NULL PRIMARY KEY,
-  product_id INTEGER NOT NULL,
+  product_id INTEGER REFERENCES products(id),,
   name VARCHAR(100),
   original_price VARCHAR(15),
   sale_price VARCHAR(15),
@@ -27,20 +27,20 @@ CREATE TABLE styles (
 
 CREATE TABLE skus (
   id INTEGER NOT NULL PRIMARY KEY,
-  style_id INTEGER,
+  style_id INTEGER REFERENCES styles(id),
   size VARCHAR(10),
   quantity INTEGER
 );
 
 CREATE TABLE photos (
   id INTEGER NOT NULL PRIMARY KEY,
-  style_id INTEGER,
+  style_id INTEGER REFERENCES styles(id),
   url VARCHAR(600),
   thumbnail_url VARCHAR(600)
 );
 
 CREATE TABLE related (
   id INTEGER NOT NULL PRIMARY KEY,
-  current_product_id INTEGER,
+  product_id INTEGER REFERENCES products(id),
   related_product_id INTEGER
 );
