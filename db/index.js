@@ -10,15 +10,22 @@ const pool = new Pool({
   database: config.database
 })
 
-// pool.connect(
-//   (err) => {
-//     if (err) {
-//       return console.error('Error acquiring client', err)
-//     }}
-//     console.log('connected to DB');
-// )
+const getProducts = (params) => {
+  const query = {
+    name: 'products',
+    text: `
+    SELECT * FROM products
+    ORDER BY id
+    OFFSET $1 ROW
+    FETCH NEXT $2 ROWS ONLY`,
+    values: params
+  };
 
-pool.query('SELECT * FROM features', (err, res) => {
-  console.log(err, res)
-  pool.end()
-})
+  return pool.query(query);
+};
+
+
+module.exports = {
+  pool,
+  getProducts
+};
