@@ -1,21 +1,25 @@
-const express = require("express");
-const app = express();
-const port = 3000;
-const db = require('../db/index');
+const express = require('express')
+const bodyParser = require('body-parser')
+const db = require('../db/index')
 
-app.use(express.json());
+const app = express()
+const port = 3000
 
-app.get('/products', (req, res) => {
-  const {page = 1, count = 5} = req.query;
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
-  db.getProducts([count, page])
-    .then(result => (result.rows))
-    .then(result => (res.json(result)))
-    .catch(error => {
-      console.log('Product list', error);
-      res.status(500).send();
-    })
+app.get('/', (req, res) => {
+  res.send('hello world!');
 })
+
+// get all products
+app.get('/products', db.getProducts);
+
+// get product information
+app.get('/products/:id', db.getProductInfo);
+
+// get product styles
+app.get('/products/:id/styles', db.getProductStyles);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`)
