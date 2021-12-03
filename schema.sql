@@ -83,3 +83,7 @@ COPY related
 FROM '/Users/yachao/Desktop/Hack Reactor/Senior Phase/SDC/CSV data/related.csv'
 DELIMITER ','
 CSV HEADER;
+
+CREATE INDEX products_idx ON products (id);
+CREATE INDEX features_idx ON features (product_id);
+CREATE INDEX styles_idx ON styles (product_id);
