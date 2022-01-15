@@ -27,11 +27,11 @@ $ npm start
 
 ## API Reference
 
-### List Reviews
+### List Products
 
-> Returns a list of reviews for a specific product. _Does not includes reported reviews_
+> Retrieves the list of products.
 
-`GET /reviews`
+`GET /products`
 
 Query Parameters
 
@@ -39,87 +39,60 @@ Query Parameters
 | :--------- | :------ | :---------------------------------------------------------------------------------- |
 | page       | integer | Selects the page of results to return. Default 1.                                   |
 | count      | integer | Specifies how many results per page to return. Default 5.                           |
-| sort       | text    | Changes the sort order of reviews to be based on "newest", "helpful", or "relevant" |
-| product_id | integer | `REQUIRED` Specifies the product for which to retrieve reviews.                     |
 
 Response:
 `Status: 200 OK`
 
 ---
 
-### Get Review Metadata
+### Get Product Information
 
-> Returns review metadata for a given product.
+> Returns all product level information for a specified product id.
 
-`GET /reviews/meta`
+`GET /products/:product_id`
 
 Query Parameters
 
 | Parameter  | Type    | Description                                                    |
 | :--------- | :------ | :------------------------------------------------------------- |
-| product_id | integer | `REQUIRED` ID of the product for which data should be returned |
+| product_id | integer | `REQUIRED` ID of the product request |
 
 Response:
 `Status: 200 OK`
 
 ---
 
-### Add a Review
+### Get Product Styles
 
-> Adds a review for the given product.
+> Returns the all styles available for the given product.
 
-`POST /reviews`
+`GET /products/:product_id/styles`
 
-Body Parameters
+Query Parameters
 
-| Parameter       | Type    | Description                                                                                                                               |
-| :-------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| product_id      | integer | `REQUIRED` ID of the product to post the review for                                                                                       |
-| rating          | int     | Integer (1-5) indicating the review rating                                                                                                |
-| summary         | text    | Summary text of the review                                                                                                                |
-| body            | text    | Continued or full text of the review                                                                                                      |
-| recommend       | boolean | Value indicating if the reviewer recommends the product                                                                                   |
-| name            | text    | Username for question asker                                                                                                               |
-| email           | text    | Email address for question asker                                                                                                          |
-| photos          | [text]  | Array of text urls that link to images to be shown                                                                                        |
-| characteristics | object  | Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...} |
+| Parameter  | Type    | Description                                                    |
+| :--------- | :------ | :------------------------------------------------------------- |
+| product_id | integer | `REQUIRED` ID of the product request |
 
 Response:
-`Status: 201 CREATED`
+`Status: 200 OK`
 
 ---
 
-### Mark Review as Helpful
+### Get Related Products
 
-> Updates a review to show it was found helpful.
+> Returns the id's of products related to the product specified.
 
-`PUT /reviews/:review_id/helpful`
+`GET /products/:product_id/related`
 
-Parameters
+Query Parameters
 
-| Parameter | Type    | Description                           |
-| :-------- | :------ | :------------------------------------ |
-| reveiw_id | integer | `REQUIRED` ID of the review to update |
-
-Response:
-`Status: 204 NO CONTENT`
-
----
-
-### Report Review
-
-> Updates a review to show it was reported. _Note, this action does not delete the review, but the review will not be returned in the above GET request._
-
-`PUT /reviews/:review_id/report`
-
-Parameters
-
-| Parameter | Type    | Description                           |
-| :-------- | :------ | :------------------------------------ |
-| review_id | integer | `REQUIRED` ID of the review to update |
+| Parameter  | Type    | Description                                                    |
+| :--------- | :------ | :------------------------------------------------------------- |
+| product_id | integer | `REQUIRED` ID of the product request |
 
 Response:
-`Status: 204 NO CONTENT`
+`Status: 200 OK`
 
 ---
 
